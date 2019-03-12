@@ -19,9 +19,11 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="countUp"
-        android:text="CountUp"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="102dp" />
+        android:text="@string/countup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
