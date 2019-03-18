@@ -3,6 +3,7 @@ package com.example.helloworld;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
+        Log.e("srinivas", "seAppContext: " );
         assertEquals("com.example.helloworld1", appContext.getPackageName());
     }
 }
