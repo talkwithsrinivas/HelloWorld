@@ -36,6 +36,7 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "Build.Brand is  " +  Build.BRAND);
         Log.e("srinivas", "Build.PRODUCT is  " +  Build.PRODUCT);
         Log.e("srinivas", "Build.Serial is  " +  Build.getSerial());
+        Log.e("srinivas"," imei is " + android.telephony.TelephonyManager.getDeviceId());
         assertEquals("com.example.helloworld", appContext.getPackageName());
         // Uncomment this to cause test failure.
         //assertEquals("com.example.helloworld1", appContext.getPackageName());
