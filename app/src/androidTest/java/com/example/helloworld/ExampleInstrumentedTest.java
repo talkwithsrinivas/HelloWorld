@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.junit.Test;
@@ -35,8 +36,9 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "Build.Manufacturer is  " +  Build.MANUFACTURER);
         Log.e("srinivas", "Build.Brand is  " +  Build.BRAND);
         Log.e("srinivas", "Build.PRODUCT is  " +  Build.PRODUCT);
-        Log.e("srinivas", "Build.Serial is  " +  Build.getSerial());
-        Log.e("srinivas"," imei is " + android.telephony.TelephonyManager.getDeviceId());
+        //Log.e("srinivas", "Build.Serial is  " +  Build.getSerial());
+        //TelephonyManager telephonyManager = (TelephonyManager)appContext.getSystemService(Context.TELEPHONY_SERVICE);
+        //Log.e("srinivas"," imei is " + telephonyManager.getDeviceId());
         assertEquals("com.example.helloworld", appContext.getPackageName());
         // Uncomment this to cause test failure.
         //assertEquals("com.example.helloworld1", appContext.getPackageName());
