@@ -30,8 +30,15 @@ ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-        Log.e("srinivas", "isEmulator is " +  isEmulator());
-        assertEquals("com.example.helloworld1", appContext.getPackageName());
+        Log.e("srinivas", "isEmulator returns " +  isEmulator());
+        Log.e("srinivas", "Build.Model is  " +  Build.MODEL);
+        Log.e("srinivas", "Build.Manufacturer is  " +  Build.MANUFACTURER);
+        Log.e("srinivas", "Build.Brand is  " +  Build.BRAND);
+        Log.e("srinivas", "Build.PRODUCT is  " +  Build.PRODUCT);
+        Log.e("srinivas", "Build.Serial is  " +  Build.getSerial());
+        assertEquals("com.example.helloworld", appContext.getPackageName());
+        // Uncomment this to cause test failure.
+        //assertEquals("com.example.helloworld1", appContext.getPackageName());
     }
 
     public static boolean isEmulator() {
