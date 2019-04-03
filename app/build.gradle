@@ -4,11 +4,11 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.helloworld"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -26,4 +26,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.microsoft.appcenter:espresso-test-extension:1.4'
+
+    // Testing-only dependencies
+    androidTestImplementation 'androidx.test:core:' + rootProject.coreVersion;
+    androidTestImplementation 'androidx.test.ext:junit:' + rootProject.extJUnitVersion;
+    androidTestImplementation 'androidx.test:runner:' + rootProject.runnerVersion;
+    // UiAutomator Testing
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:' + rootProject.uiautomatorVersion;
+    androidTestImplementation 'org.hamcrest:hamcrest-integration:1.3'
 }
