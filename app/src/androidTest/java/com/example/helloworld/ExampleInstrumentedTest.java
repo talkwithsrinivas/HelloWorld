@@ -188,9 +188,13 @@ ExampleInstrumentedTest {
         intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Download/" + "Flash.apk")), "application/vnd.android.package-archive");
         //intent.setDataAndType(Uri.fromFile(new File(getApplicationContext().getExternalFilesDir(null) + "Flash.apk")), "application/vnd.android.package-archive");
         //intent.setDataAndType(Uri.fromFile(new File("/data/local/tmp/Flash.apk")), "application/vnd.android.package-archive");
+        Log.e("srinivas", "Before sleep-1");
         getApplicationContext().startActivity(intent);
+
         SystemClock.sleep(1500);
+        Log.e("srinivas", "After sleep-1");
         mDevice = UiDevice.getInstance(getInstrumentation());
+
 
         // We might get a system dialog prompt for install unknown apps
         UiObject2 SettingsButton = mDevice.findObject(By.res("android", "button1"));//.click();
@@ -204,15 +208,14 @@ ExampleInstrumentedTest {
             SystemClock.sleep(1500);
             mDevice.pressBack();
         }
-
+        Log.e("srinivas", "Before sleep-2");
         SystemClock.sleep(1500);
         // Package installer click on ok button.
         UiObject2 okButton = mDevice.findObject(By.res("com.android.packageinstaller", "ok_button"));//.click();
         if (okButton != null) {
             okButton.click();
-
         }
-
+        Log.e("srinivas", "After sleep-2");
 
     }
 /*
