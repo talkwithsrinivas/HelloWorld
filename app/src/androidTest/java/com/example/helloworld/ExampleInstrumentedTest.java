@@ -212,10 +212,12 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "Before sleep-2");
         SystemClock.sleep(1500);
         // Package installer click on ok button.
+        /*
         UiObject2 okButton = mDevice.findObject(By.res("com.android.packageinstaller", "ok_button"));//.click();
         if (okButton != null) {
             okButton.click();
-        }
+        }*/
+        mDevice.findObject(By.res("com.android.packageinstaller", "ok_button")).click();
         Log.e("srinivas", "After sleep-2");
 
     }
