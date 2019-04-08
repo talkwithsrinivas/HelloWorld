@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.*;
@@ -218,8 +220,16 @@ ExampleInstrumentedTest {
             okButton.click();
         }*/
         mDevice.findObject(By.res("com.android.packageinstaller", "ok_button")).click();
+        SystemClock.sleep(3000);
         Log.e("srinivas", "After sleep-2");
+        mDevice.pressHome();
+        Intent intent1 = new Intent(Intent.ACTION_MAIN, null);
+        intent1.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> apps = getApplicationContext().getPackageManager().queryIntentActivities( intent1 , 0);
 
+        for (int i = 0; i < apps.size(); i++) {
+            System.out.println(apps.get(i).toString());
+        }
     }
 
     @Test
