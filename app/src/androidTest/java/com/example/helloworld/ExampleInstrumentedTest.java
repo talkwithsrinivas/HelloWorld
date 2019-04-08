@@ -190,10 +190,11 @@ ExampleInstrumentedTest {
         //intent.setDataAndType(Uri.fromFile(new File("/data/local/tmp/Flash.apk")), "application/vnd.android.package-archive");
         Log.e("srinivas", "Before sleep-1");
         getApplicationContext().startActivity(intent);
-
+        mDevice = UiDevice.getInstance(getInstrumentation());
+        mDevice.wait(Until.hasObject(By.pkg("com.android.packageinstaller").depth(0)), LAUNCH_TIMEOUT);
         SystemClock.sleep(1500);
         Log.e("srinivas", "After sleep-1");
-        mDevice = UiDevice.getInstance(getInstrumentation());
+
 
 
         // We might get a system dialog prompt for install unknown apps
