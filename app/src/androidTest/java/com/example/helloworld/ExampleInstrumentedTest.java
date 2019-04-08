@@ -234,7 +234,7 @@ ExampleInstrumentedTest {
         }
     }
 */
-/*
+
     @Test
     public void launchChrome() {
 
@@ -245,9 +245,10 @@ ExampleInstrumentedTest {
         intent.setData(Uri.parse("https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?id=654038"));
         context.startActivity(intent);
         mDevice.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), LAUNCH_TIMEOUT);
+
     }
 
-
+/*
     @Test
     public void launchPlayStore() {
         mDevice = UiDevice.getInstance(getInstrumentation());
