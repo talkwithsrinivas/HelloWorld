@@ -219,6 +219,19 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "After sleep-2");
 
     }
+
+    @Test
+    public void checkCountUp() {
+        mDevice = UiDevice.getInstance(getInstrumentation());
+        Context context = getApplicationContext();
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.example.helloworld");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //intent.setData(Uri.parse("https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?id=654038"));
+        context.startActivity(intent);
+        mDevice.wait(Until.hasObject(By.pkg("com.example.helloworld").depth(0)), LAUNCH_TIMEOUT);
+        mDevice.findObject(By.res("com.example.helloworld", "button")).click();
+    }
+
 /*
     @Test
     public void installFlash2() {
@@ -234,7 +247,7 @@ ExampleInstrumentedTest {
         }
     }
 */
-
+/*
     @Test
     public void launchChrome() {
 
@@ -248,7 +261,7 @@ ExampleInstrumentedTest {
 
     }
 
-/*
+
     @Test
     public void launchPlayStore() {
         mDevice = UiDevice.getInstance(getInstrumentation());
