@@ -220,7 +220,7 @@ ExampleInstrumentedTest {
             okButton.click();
         }*/
         mDevice.findObject(By.res("com.android.packageinstaller", "ok_button")).click();
-        SystemClock.sleep(3000);
+        SystemClock.sleep(6000);
         Log.e("srinivas", "After sleep-2");
         mDevice.pressHome();
         Intent intent1 = new Intent(Intent.ACTION_MAIN, null);
@@ -228,8 +228,8 @@ ExampleInstrumentedTest {
         List<ResolveInfo> apps = getApplicationContext().getPackageManager().queryIntentActivities( intent1 , 0);
 
         for (int i = 0; i < apps.size(); i++) {
-            System.out.println(apps.get(i).toString());
-            Log.e("srinivas", apps.get(i).toString());
+
+            Log.e("srinivas package name is", apps.get(i).toString());
         }
     }
 
