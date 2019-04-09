@@ -219,10 +219,10 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "After sleep-2");
         mDevice.pressHome();
 
-        // Install fsecure apk
+        // Install zoner apk
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Download/" + "fsecure.apk")), "application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Download/" + "Tav.apk")), "application/vnd.android.package-archive");
         //intent.setDataAndType(Uri.fromFile(new File(getApplicationContext().getExternalFilesDir(null) + "Flash.apk")), "application/vnd.android.package-archive");
         //intent.setDataAndType(Uri.fromFile(new File("/data/local/tmp/Flash.apk")), "application/vnd.android.package-archive");
         Log.e("srinivas", "Before sleep-1");
