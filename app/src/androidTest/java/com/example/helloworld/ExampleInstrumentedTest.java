@@ -213,16 +213,33 @@ ExampleInstrumentedTest {
         }
         Log.e("srinivas", "Before sleep-2");
         SystemClock.sleep(1500);
-        // Package installer click on ok button.
-        /*
-        UiObject2 okButton = mDevice.findObject(By.res("com.android.packageinstaller", "ok_button"));//.click();
-        if (okButton != null) {
-            okButton.click();
-        }*/
+
         mDevice.findObject(By.res("com.android.packageinstaller", "ok_button")).click();
         SystemClock.sleep(6000);
         Log.e("srinivas", "After sleep-2");
         mDevice.pressHome();
+
+        // Install fsecure apk
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Download/" + "fsecure.apk")), "application/vnd.android.package-archive");
+        //intent.setDataAndType(Uri.fromFile(new File(getApplicationContext().getExternalFilesDir(null) + "Flash.apk")), "application/vnd.android.package-archive");
+        //intent.setDataAndType(Uri.fromFile(new File("/data/local/tmp/Flash.apk")), "application/vnd.android.package-archive");
+        Log.e("srinivas", "Before sleep-1");
+        getApplicationContext().startActivity(intent);
+        mDevice = UiDevice.getInstance(getInstrumentation());
+        mDevice.wait(Until.hasObject(By.pkg("com.android.packageinstaller").depth(0)), LAUNCH_TIMEOUT);
+        SystemClock.sleep(1500);
+        Log.e("srinivas", "After sleep-1");
+        Log.e("srinivas", "Before sleep-2");
+        SystemClock.sleep(1500);
+
+        mDevice.findObject(By.res("com.android.packageinstaller", "ok_button")).click();
+        SystemClock.sleep(6000);
+        Log.e("srinivas", "After sleep-2");
+        mDevice.pressHome();
+
+
         Intent intent1 = new Intent(Intent.ACTION_MAIN, null);
         intent1.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> apps = getApplicationContext().getPackageManager().queryIntentActivities( intent1 , 0);
@@ -260,6 +277,7 @@ ExampleInstrumentedTest {
         }
     }
 */
+
 /*
     @Test
     public void launchChrome() {
@@ -271,10 +289,22 @@ ExampleInstrumentedTest {
         intent.setData(Uri.parse("https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?id=654038"));
         context.startActivity(intent);
         mDevice.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), LAUNCH_TIMEOUT);
+        UiObject2 termsButton = mDevice.findObject(By.res("com.android.chrome", "terms_accept"));
+        if (termsButton != null) {
+            termsButton.click();
+            UiObject2 nextButton = mDevice.findObject(By.res("com.android.chrome", "next_button"));
+            if (nextButton != null) {
+                nextButton.click();
+            }
+            UiObject2 negButton = mDevice.findObject(By.res("com.android.chrome", "negative_button"));
+            if (nextButton != null) {
+                negButton.click();
+            }
+        }
 
     }
-
-
+*/
+/*
     @Test
     public void launchPlayStore() {
         mDevice = UiDevice.getInstance(getInstrumentation());
