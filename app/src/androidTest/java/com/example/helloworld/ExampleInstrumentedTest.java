@@ -229,6 +229,7 @@ ExampleInstrumentedTest {
 
         for (int i = 0; i < apps.size(); i++) {
             System.out.println(apps.get(i).toString());
+            Log.e("srinivas", apps.get(i).toString());
         }
     }
 
