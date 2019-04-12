@@ -10,7 +10,11 @@
 Slightly modified version of Sun Checks that better matches the default code formatter setting of Eclipse.
 -->
 <module name="Checker">
+    <!--
     <property name="severity" value="ignore"/>
+    <property name="severity" value="error"/>
+    -->
+    <property name="severity" value="info"/>
     <module name="TreeWalker">
         <property name="tabWidth" value="4"/>
         <module name="SuppressionCommentFilter"/>
