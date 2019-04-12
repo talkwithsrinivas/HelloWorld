@@ -22,12 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
-
+//@SuppressWarnings("PMD")
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+           super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("MainActivity", "Hello world");
 
@@ -47,8 +47,21 @@ public class MainActivity extends AppCompatActivity {
         Log.i("message:", "Toast CountUp method");
     }
 
+    private void someMethod(int variable) {
+        switch (variable) {
+            case 1:
+                char ch = 'A';
+                if (ch != -1) {
+                    System.out.println("1");
+                }
 
-
+            case 2:
+                System.out.println("2");
+        }
+        int ar[] = {1, 2, 3, 4, 5};
+        for (int i=0; i<=ar.length; i++)
+            System.out.println(ar[i]);
+    }
 
 
 }

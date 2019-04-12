@@ -1,4 +1,101 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+task pmd(type: Pmd) {
+    ruleSetFiles = files("$project.rootDir/config/pmd/rules-pmd.xml")
+    source = fileTree('src/main/java/')
+    ignoreFailures = false
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        //html.destination = "$project.buildDir/outputs/pmd/pmd.html"
+    }
+}
+
+
+preBuild.dependsOn('checkstyle')
+assemble.dependsOn('lint')
+check.dependsOn('checkstyle')
+check.dependsOn('findbugs')
+
+
+jacoco {
+    toolVersion = '0.8.0'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code_coverage/debugAndroidTest/connected/**/*.ec'
+    ])
+}
+
+checkstyle {
+    toolVersion "8.16"
+}
+
+task checkstyle(type: Checkstyle) {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+
+    def configProps = ['proj.module.dir': projectDir.absolutePath]
+    configProperties configProps
+
+    // empty classpath
+    classpath = files()
+
+    showViolations true
+
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+
+task findbugs(type: FindBugs, dependsOn: ['assembleDebug']) {
+    description 'Find bugs mainly design flaws, bad practices, multithreaded correctness and code vulnerabilities.'
+    group 'verification'
+    excludeFilter = file("$project.rootDir/config/findbugs/rules-findbugs.xml")
+    classes = fileTree("$project.buildDir/intermediates/javac")
+    source = fileTree('src/main/java')
+
+    effort 'max'
+    reportLevel = "high"
+    classpath = files()
+    ignoreFailures = false
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        //html.destination = "$project.buildDir/outputs/findbugs/findbugs.html"
+    }
+}
+check.doLast {
+    project.tasks.getByName("findbugs").execute()
+}
+
 
 android {
     compileSdkVersion 28
@@ -10,10 +107,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    lintOptions {
+        abortOnError false // turn this to true to cause build abort on lint errors
+        ignoreWarnings false
+        checkAllWarnings true
+        // if true, treat all warnings as errors
+        warningsAsErrors true
+    }
+
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 }
@@ -22,7 +139,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
     testImplementation 'junit:junit:4.12'
+    testImplementation 'com.android.support.test:rules:1.0.2'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "org.robolectric:robolectric:4.0-beta-1"
+
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.microsoft.appcenter:espresso-test-extension:1.4'
@@ -37,4 +161,8 @@ dependencies {
 
     //
     androidTestImplementation 'androidx.test:rules:1.1.0'
+
+
+    //spotbugs
+    //spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
