@@ -54,6 +54,11 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void validateSomeMethod() {
+        activity.someMethod(1);
+    }
+
+    @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
