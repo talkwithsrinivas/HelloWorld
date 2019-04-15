@@ -219,7 +219,7 @@ ExampleInstrumentedTest {
         Log.e("srinivas", "After sleep-2");
         mDevice.pressHome();
 
-        // Install zoner apk
+        // Install Tav apk
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Download/" + "Tav.apk")), "application/vnd.android.package-archive");

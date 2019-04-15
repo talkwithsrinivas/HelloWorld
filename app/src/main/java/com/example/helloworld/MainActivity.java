@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i("message:", "Toast CountUp method");
     }
 
-    private void someMethod(int variable) {
+/*
+    public void someMethod(int variable) {
         switch (variable) {
             case 1:
                 char ch = 'A';
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<=ar.length; i++)
             System.out.println(ar[i]);
     }
-
+*/
 
 }
 
